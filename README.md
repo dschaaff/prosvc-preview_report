@@ -1,4 +1,7 @@
 # Basic Usage
+This was forked from [puppet preview
+tool](https://github.com/puppetlabs/puppetlabs-catalog_preview) and updated
+to work with open source puppet.
 
 This tool is built to consume the overview-json output of the [puppet preview
 tool](https://github.com/puppetlabs/puppetlabs-catalog_preview)
