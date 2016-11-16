@@ -490,7 +490,7 @@ mab.html do
         top_ten = overview['all_nodes'][0..9]
       end
       top_ten.each do |node|
-        preview_log = load_json("/var/opt/lib/pe-puppet/preview/#{node['name']}/preview_log.json")
+        preview_log = load_json("/var/lib/puppet/preview/#{node['name']}/preview_log.json")
         # PRE-103 Compatibility with old format
         issue_count = (node['error_count'] + node['warning_count']) || node['issue_count'] 
         li do
@@ -638,12 +638,12 @@ mab.html do
       ul do
         # PRE-101 changes to formating
         if overview['top_ten']
-          diffs = find_diffs('/var/opt/lib/pe-puppet/preview/')
+          diffs = find_diffs('/var/lib/puppet/preview/')
         else
            # PRE-103 As the top ten list is sorted by issues, sort the node breakdown by catalog changes
            # This is actually the default if the nodes have no issues, but if all nodes have at least
            # 1 known issue, then this sorting is skewed in favor of that, thus we always sort explicitly
-          diffs = overview['all_nodes'].sort_by{ |h| h['added_resource_count'] + h['missing_resource_count'] + h['conflicting_resource_count'] }.map{ |node| "/var/opt/lib/pe-puppet/preview/#{node['name']}/catalog_diff.json" }
+          diffs = overview['all_nodes'].sort_by{ |h| h['added_resource_count'] + h['missing_resource_count'] + h['conflicting_resource_count'] }.map{ |node| "/var/lib/puppet/preview/#{node['name']}/catalog_diff.json" }
         end
         diffs.each do |catalog_diff_file|
           #puts catalog_diff_file
